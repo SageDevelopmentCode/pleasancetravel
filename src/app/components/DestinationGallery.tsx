@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Destination } from "../data/destinations";
 
 interface DestinationGalleryProps {
@@ -34,13 +34,30 @@ export default function DestinationGallery({
 
   const scrollToCard = (index: number) => {
     if (scrollContainerRef.current) {
-      const cardWidth = 280; // w-64 (256px) + gap
-      scrollContainerRef.current.scrollTo({
-        left: index * cardWidth,
+      const container = scrollContainerRef.current;
+      const cardWidth = 192; // w-48 actual width
+      const gap = 24; // gap-6
+      const totalCardWidth = cardWidth + gap;
+
+      // Calculate position to center the card in viewport
+      const cardPosition = index * totalCardWidth;
+      const containerWidth = container.offsetWidth;
+      const scrollPosition = cardPosition - (containerWidth / 2) + (cardWidth / 2);
+
+      container.scrollTo({
+        left: Math.max(0, scrollPosition), // Prevent negative scroll
         behavior: "smooth",
       });
     }
   };
+
+  // Auto-scroll gallery when active destination changes
+  useEffect(() => {
+    const currentIndex = destinations.findIndex(d => d.id === activeDestination.id);
+    if (currentIndex !== -1) {
+      scrollToCard(currentIndex);
+    }
+  }, [activeDestination.id]);
 
   const activeIndex = destinations.findIndex(d => d.id === activeDestination.id);
 

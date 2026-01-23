@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
+import BookNowButton from "./BookNowButton";
 
 const menuItems = [
   "Home",
@@ -54,10 +54,7 @@ export default function Header() {
         </nav>
 
         {/* Book Now Button */}
-        <button className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors">
-          Book Now
-          <ArrowUpRight size={20} />
-        </button>
+        <BookNowButton />
       </div>
     </header>
   );

@@ -1,15 +1,24 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import Header from "./components/Header";
+import BookNowButton from "./components/BookNowButton";
+import DestinationGallery from "./components/DestinationGallery";
+import { destinations } from "./data/destinations";
 
 export default function Home() {
+  const [activeDestination, setActiveDestination] = useState(destinations[0]);
+
   return (
     <div className="bg-white">
       <div className="relative h-screen w-full overflow-hidden">
         <Image
-          src="/assets/Hawaii.jpg"
-          alt="Hawaii background"
+          key={activeDestination.id}
+          src={activeDestination.image}
+          alt={`${activeDestination.name} background`}
           fill
-          className="object-cover"
+          className="object-cover transition-opacity duration-500"
           priority
         />
         <div
@@ -38,6 +47,24 @@ export default function Home() {
             </p>
           </div>
         </div>
+
+        {/* Destination Section - Bottom Left */}
+        <div className="absolute bottom-18 left-18 max-w-lg font-[family-name:var(--font-montserrat)]">
+          <h2 className="text-white text-5xl font-semibold mb-4">
+            {activeDestination.name}
+          </h2>
+          <p className="text-white text-base leading-relaxed mb-6 max-w-md">
+            {activeDestination.description}
+          </p>
+          <BookNowButton />
+        </div>
+
+        {/* Destination Gallery - Bottom Right */}
+        <DestinationGallery
+          destinations={destinations}
+          activeDestination={activeDestination}
+          onSelectDestination={setActiveDestination}
+        />
       </div>
     </div>
   );

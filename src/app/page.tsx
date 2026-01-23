@@ -5,7 +5,9 @@ import { useState, useEffect, useCallback } from "react";
 import Header from "./components/Header";
 import BookNowButton from "./components/BookNowButton";
 import DestinationGallery from "./components/DestinationGallery";
+import ServicesGallery from "./components/ServicesGallery";
 import { destinations } from "./data/destinations";
+import { services } from "./data/services";
 
 export default function Home() {
   const [activeDestination, setActiveDestination] = useState(destinations[0]);
@@ -118,6 +120,14 @@ export default function Home() {
           activeDestination={activeDestination}
           onSelectDestination={handleUserInteraction}
         />
+      </div>
+
+      {/* Services Section */}
+      <div className="bg-white py-16 px-8">
+        <h2 className="text-black text-4xl font-semibold text-center font-[family-name:var(--font-montserrat)] mb-12">
+          Our Travel Services Range From:
+        </h2>
+        <ServicesGallery services={services} />
       </div>
     </div>
   );

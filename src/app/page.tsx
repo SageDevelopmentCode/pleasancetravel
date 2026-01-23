@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "./components/Header";
 import BookNowButton from "./components/BookNowButton";
 import DestinationGallery from "./components/DestinationGallery";
@@ -11,8 +11,9 @@ export default function Home() {
   const [activeDestination, setActiveDestination] = useState(destinations[0]);
   const [previousDestination, setPreviousDestination] = useState(destinations[0]);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isAutoPlayActive, setIsAutoPlayActive] = useState(true);
 
-  const handleDestinationChange = (newDestination: typeof destinations[0]) => {
+  const handleDestinationChange = useCallback((newDestination: typeof destinations[0]) => {
     if (newDestination.id === activeDestination.id) return;
 
     setPreviousDestination(activeDestination);
@@ -22,7 +23,27 @@ export default function Home() {
     setTimeout(() => {
       setIsTransitioning(false);
     }, 800);
+  }, [activeDestination]);
+
+  const handleUserInteraction = (newDestination: typeof destinations[0]) => {
+    setIsAutoPlayActive(false);
+    handleDestinationChange(newDestination);
   };
+
+  // Auto-play carousel
+  useEffect(() => {
+    if (!isAutoPlayActive) return;
+
+    const autoAdvance = () => {
+      const currentIndex = destinations.findIndex(d => d.id === activeDestination.id);
+      const nextIndex = (currentIndex + 1) % destinations.length;
+      handleDestinationChange(destinations[nextIndex]);
+    };
+
+    const interval = setInterval(autoAdvance, 5000);
+
+    return () => clearInterval(interval);
+  }, [activeDestination, isAutoPlayActive, handleDestinationChange]);
 
   return (
     <div className="bg-white">
@@ -95,7 +116,7 @@ export default function Home() {
         <DestinationGallery
           destinations={destinations}
           activeDestination={activeDestination}
-          onSelectDestination={handleDestinationChange}
+          onSelectDestination={handleUserInteraction}
         />
       </div>
     </div>

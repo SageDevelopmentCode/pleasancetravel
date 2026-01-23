@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import BookNowButton from "./components/BookNowButton";
 import DestinationGallery from "./components/DestinationGallery";
 import ServicesGallery from "./components/ServicesGallery";
+import CertificationLogos from "./components/CertificationLogos";
 import { destinations } from "./data/destinations";
 import { services } from "./data/services";
 
@@ -129,6 +130,9 @@ export default function Home() {
         </h2>
         <ServicesGallery services={services} />
       </div>
+
+      {/* Certification Logos Section */}
+      <CertificationLogos />
     </div>
   );
 }

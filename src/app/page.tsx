@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import BookNowButton from "./components/BookNowButton";
 import DestinationGallery from "./components/DestinationGallery";
@@ -9,16 +9,42 @@ import { destinations } from "./data/destinations";
 
 export default function Home() {
   const [activeDestination, setActiveDestination] = useState(destinations[0]);
+  const [previousDestination, setPreviousDestination] = useState(destinations[0]);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleDestinationChange = (newDestination: typeof destinations[0]) => {
+    if (newDestination.id === activeDestination.id) return;
+
+    setPreviousDestination(activeDestination);
+    setIsTransitioning(true);
+    setActiveDestination(newDestination);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 800);
+  };
 
   return (
     <div className="bg-white">
       <div className="relative h-screen w-full overflow-hidden">
+        {/* Previous/Current Background Image Layer */}
         <Image
-          key={activeDestination.id}
+          key={`prev-${previousDestination.id}`}
+          src={previousDestination.image}
+          alt={`${previousDestination.name} background`}
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* New Background Image Layer - Fades in on top */}
+        <Image
+          key={`active-${activeDestination.id}`}
           src={activeDestination.image}
           alt={`${activeDestination.name} background`}
           fill
-          className="object-cover transition-opacity duration-500"
+          className={`object-cover transition-opacity duration-700 ease-in-out ${
+            isTransitioning || activeDestination.id === previousDestination.id ? "opacity-0" : "opacity-100"
+          }`}
           priority
         />
         <div
@@ -50,20 +76,26 @@ export default function Home() {
 
         {/* Destination Section - Bottom Left */}
         <div className="absolute bottom-18 left-18 max-w-lg font-[family-name:var(--font-montserrat)]">
-          <h2 className="text-white text-5xl font-semibold mb-4">
-            {activeDestination.name}
-          </h2>
-          <p className="text-white text-base leading-relaxed mb-6 max-w-md">
-            {activeDestination.description}
-          </p>
-          <BookNowButton />
+          <div
+            className={`transition-opacity duration-500 ease-in-out ${
+              isTransitioning ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            <h2 className="text-white text-5xl font-semibold mb-4">
+              {activeDestination.name}
+            </h2>
+            <p className="text-white text-base leading-relaxed mb-6 max-w-md">
+              {activeDestination.description}
+            </p>
+            <BookNowButton />
+          </div>
         </div>
 
         {/* Destination Gallery - Bottom Right */}
         <DestinationGallery
           destinations={destinations}
           activeDestination={activeDestination}
-          onSelectDestination={setActiveDestination}
+          onSelectDestination={handleDestinationChange}
         />
       </div>
     </div>

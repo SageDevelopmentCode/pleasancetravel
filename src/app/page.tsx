@@ -81,7 +81,7 @@ export default function Home() {
 
         {/* Hero Text Section */}
         <div className="absolute top-1/4 left-0 right-0 flex flex-col items-center gap-4 px-8 font-[family-name:var(--font-montserrat)]">
-          <h1 className="text-white text-5xl font-semibold text-center max-w-2xl leading-tight">
+          <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-semibold text-center max-w-2xl leading-tight">
             Pleasant Ways to Travel the World Today
           </h1>
 
@@ -99,7 +99,7 @@ export default function Home() {
         </div>
 
         {/* Destination Section - Bottom Left */}
-        <div className="absolute bottom-18 left-18 max-w-lg font-[family-name:var(--font-montserrat)]">
+        <div className="absolute bottom-32 left-4 sm:bottom-24 sm:left-8 lg:bottom-20 lg:left-18 2xl:bottom-18 2xl:left-18 max-w-lg font-[family-name:var(--font-montserrat)]">
           <div
             className={`transition-opacity duration-500 ease-in-out ${
               isTransitioning ? "opacity-0" : "opacity-100"

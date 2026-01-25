@@ -9,6 +9,7 @@ import ServicesGallery from "./components/ServicesGallery";
 import CertificationLogos from "./components/CertificationLogos";
 import CruisesGallery from "./components/CruisesGallery";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 import { destinations } from "./data/destinations";
 import { services } from "./data/services";
 import { cruiseLines } from "./data/cruises";
@@ -224,6 +225,9 @@ export default function Home() {
 
       {/* Contact Section */}
       <Contact />
+
+      {/* Footer Section */}
+      <Footer />
     </div>
   );
 }

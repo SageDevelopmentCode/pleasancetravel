@@ -8,6 +8,7 @@ import DestinationGallery from "./components/DestinationGallery";
 import ServicesGallery from "./components/ServicesGallery";
 import CertificationLogos from "./components/CertificationLogos";
 import CruisesGallery from "./components/CruisesGallery";
+import Contact from "./components/Contact";
 import { destinations } from "./data/destinations";
 import { services } from "./data/services";
 import { cruiseLines } from "./data/cruises";
@@ -220,6 +221,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Contact Section */}
+      <Contact />
     </div>
   );
 }

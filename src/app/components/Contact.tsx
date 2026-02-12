@@ -63,26 +63,12 @@ export default function Contact() {
               <h4 className="text-black text-lg font-semibold font-[family-name:var(--font-montserrat)] mb-3">
                 Phone
               </h4>
-              <div className="flex flex-col gap-2">
-                <a
-                  href="tel:+17146469202"
-                  className="text-gray-600 text-base font-[family-name:var(--font-montserrat)] hover:text-black hover:underline transition-colors"
-                >
-                  (714) 646-9202
-                </a>
-                <a
-                  href="tel:+17146463363"
-                  className="text-gray-600 text-base font-[family-name:var(--font-montserrat)] hover:text-black hover:underline transition-colors"
-                >
-                  (714) 646-3363
-                </a>
-                <a
-                  href="tel:+17146463364"
-                  className="text-gray-600 text-base font-[family-name:var(--font-montserrat)] hover:text-black hover:underline transition-colors"
-                >
-                  (714) 646-3364
-                </a>
-              </div>
+              <a
+                href="tel:+17146469202"
+                className="text-gray-600 text-base font-[family-name:var(--font-montserrat)] hover:text-black hover:underline transition-colors"
+              >
+                (714) 646-9202
+              </a>
             </div>
           </div>
 
@@ -99,7 +85,7 @@ export default function Contact() {
                 Fax
               </h4>
               <p className="text-gray-600 text-base font-[family-name:var(--font-montserrat)]">
-                (714) 646-9203
+                (714) 577-9299
               </p>
             </div>
           </div>

@@ -80,18 +80,6 @@ export default function Footer() {
                   +1 (714) 646-9202
                 </a>
                 <a
-                  href="tel:+17146463363"
-                  className="text-white/80 text-sm font-[family-name:var(--font-montserrat)] hover:text-white transition-colors block"
-                >
-                  +1 (714) 646-3363
-                </a>
-                <a
-                  href="tel:+17146463364"
-                  className="text-white/80 text-sm font-[family-name:var(--font-montserrat)] hover:text-white transition-colors block"
-                >
-                  +1 (714) 646-3364
-                </a>
-                <a
                   href="mailto:pleasancetravel@roadrunner.com"
                   className="text-white/80 text-sm font-[family-name:var(--font-montserrat)] hover:text-white transition-colors block break-all"
                 >
